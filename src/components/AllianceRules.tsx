@@ -46,7 +46,7 @@ export const AllianceRules: React.FC = () => {
   };
 
   const handleCopyRule = (title: string, text: string, id: string) => {
-    navigator.clipboard.writeText(`${title}\n${text}`);
+    navigator.clipboard.writeText(title ? `${title}\n${text}` : text);
     setCopiedRuleId(id);
     setTimeout(() => setCopiedRuleId(null), 2500);
   };
@@ -104,6 +104,46 @@ export const AllianceRules: React.FC = () => {
               <span>{showMemoPreview ? "Скрыть текст памятки" : "Посмотреть текст памятки"}</span>
             </button>
           </div>
+        </div>
+
+        {/* Newcomer Personal Message (ЛС до 300 символов: Ник + Чат + Правила) */}
+        <div className="relative z-10 p-4 rounded-xl bg-amber-50/80 border border-amber-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-[10px] font-mono font-extrabold uppercase px-2 py-0.5 rounded bg-amber-200/80 text-amber-900 border border-amber-300">
+                ЛС НОВИЧКУ ПРИ ВСТУПЛЕНИИ (276 СИМВОЛОВ)
+              </span>
+              <span className="text-xs font-bold text-amber-900">
+                Смена ника + Чат + Главные правила (до 300 симв.)
+              </span>
+            </div>
+            <p className="text-xs sm:text-sm text-slate-800 font-medium select-all">
+              Привет! Добро пожаловать в альянс! Если хочешь играть и развиваться с нами: 1) Сразу смени стандартный ник на читаемый. 2) Внимательно читай чат и почту альянса. 3) Науку качай строго по 👍, участвуй в Дуэли и событиях, соседей нашего сервера не атакуй (грабим только чужие)!
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() =>
+              handleCopyRule(
+                "",
+                "Привет! Добро пожаловать в альянс! Если хочешь играть и развиваться с нами: 1) Сразу смени стандартный ник на читаемый. 2) Внимательно читай чат и почту альянса. 3) Науку качай строго по 👍, участвуй в Дуэли и событиях, соседей нашего сервера не атакуй (грабим только чужие)!",
+                "newbie_welcome_chat"
+              )
+            }
+            className="px-3.5 py-2 rounded-xl bg-white hover:bg-amber-100 text-amber-900 border border-amber-300 text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shrink-0 shadow-2xs transition-colors"
+          >
+            {copiedRuleId === "newbie_welcome_chat" ? (
+              <>
+                <Check className="w-3.5 h-3.5 text-emerald-600" />
+                <span className="text-emerald-700">Скопировано для ЛС!</span>
+              </>
+            ) : (
+              <>
+                <Copy className="w-3.5 h-3.5 text-amber-700" />
+                <span>Скопировать для ЛС</span>
+              </>
+            )}
+          </button>
         </div>
 
         {/* Memo Full Preview Card */}

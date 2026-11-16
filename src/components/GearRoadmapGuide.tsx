@@ -40,7 +40,7 @@ const GEAR_ROADMAP_STEPS: GearStep[] = [
   { num: 13, column: 2, gearType: "armor", heroes: "Марлена / Зоя / Харпер", target: "броня до 40" },
   { num: 14, column: 2, gearType: "boots", heroes: "Даскал / Артур", target: "ботинки до 5★", hasStar: true },
   { num: 15, column: 2, gearType: "gloves", heroes: "Марлена / Зоя", target: "перчатки до 4★", hasStar: true },
-  { num: 16, column: 2, gearType: "gloves", heroes: "Даскал / Артур", target: "про 40", subnote: "(вероятно, оружие/меч или перчатки)" },
+  { num: 16, column: 2, gearType: "gloves", heroes: "Даскал / Артур", target: "перчатки до 40" },
   { num: 17, column: 2, gearType: "sword", heroes: "Даскал / Артур", target: "меч до 40" },
   { num: 18, column: 2, gearType: "all", heroes: "ВСЁ СНАРЯЖЕНИЕ", target: "до 1★", hasStar: true, isSpecial: true },
 
@@ -241,7 +241,7 @@ export const GearRoadmapGuide: React.FC = () => {
 🏆13. Марлена / Зоя / Харпер — броня до 40
 🏆14. Даскал / Артур — ботинки до 5★
 🏆15. Марлена / Зоя — перчатки до 4★
-🏆16. Даскал / Артур — про 40 (вероятно, оружие/меч)
+🏆16. Даскал / Артур — перчатки до 40
 🏆17. Даскал / Артур — меч до 40
 🏆18. ВСЁ СНАРЯЖЕНИЕ — до 1★
 
@@ -603,7 +603,7 @@ export const GearRoadmapGuide: React.FC = () => {
             <p>🏆 Марлена / Зоя / Харпер — <strong>броня до 40</strong></p>
             <p>🏆 Даскал / Артур — <strong>ботинки до 5★</strong></p>
             <p>🏆 Марлена / Зоя — <strong>перчатки до 4★</strong></p>
-            <p>🏆 Даскал / Артур — <strong>про 40 (вероятно, оружие/меч)</strong></p>
+            <p>🏆 Даскал / Артур — <strong>перчатки до 40</strong></p>
             <p>🏆 Даскал / Артур — <strong>меч до 40</strong></p>
             <p>🏆 <strong>ВСЁ СНАРЯЖЕНИЕ — до 1★</strong></p>
           </div>

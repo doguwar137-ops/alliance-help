@@ -29,6 +29,7 @@ interface TodayDirectiveProps {
   onOpenEraRevival?: () => void;
   onOpenBlightBoss?: () => void;
   onOpenHeroSkills?: () => void;
+  onOpenCursedPotion?: () => void;
 }
 
 export const TodayDirective: React.FC<TodayDirectiveProps> = ({
@@ -41,6 +42,7 @@ export const TodayDirective: React.FC<TodayDirectiveProps> = ({
   onOpenEraRevival,
   onOpenBlightBoss,
   onOpenHeroSkills,
+  onOpenCursedPotion,
 }) => {
   const [copiedMail, setCopiedMail] = useState(false);
   const [copiedChat, setCopiedChat] = useState(false);
@@ -912,6 +914,37 @@ ${currentDay.phaseName}
             className="w-full sm:w-auto justify-center px-4 py-2.5 sm:py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 flex-shrink-0 cursor-pointer"
           >
             <span>Гайд по Боссу</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
+
+      {/* Cursed Potion Quick Tactical Banner */}
+      {onOpenCursedPotion && (
+        <div className="rounded-xl bg-gradient-to-r from-emerald-50 via-white to-purple-50 border border-emerald-200 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-2xs">
+          <div className="flex items-start sm:items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-emerald-100 border border-emerald-200 text-emerald-700 flex-shrink-0">
+              <FlaskConical className="w-5 h-5 text-emerald-600" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2 flex-wrap">
+                <h4 className="text-sm font-extrabold text-emerald-950">
+                  Ивент «Проклятое зелье»: тактика сбора и выживания
+                </h4>
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-200/80 text-emerald-900 border border-emerald-300">
+                  БЕСПЛАТНОЕ ТП • КД 5 МИН
+                </span>
+              </div>
+              <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
+                Уровни 1–26 — скраю под щитом на аптечки, 27–28 — в центре на кости зверя. 1-й отряд полный, 2-й и 3-й по 1 синему герою! При атаке отзываем войска и делаем ТП!
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={onOpenCursedPotion}
+            className="w-full sm:w-auto justify-center px-4 py-2.5 sm:py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 flex-shrink-0 cursor-pointer"
+          >
+            <span>Гайд по Зелью</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>

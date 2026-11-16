@@ -22,6 +22,7 @@ import {
   X,
   Check,
   Skull,
+  FlaskConical,
 } from "lucide-react";
 import { Header } from "./components/Header";
 import { TodayDirective } from "./components/TodayDirective";
@@ -39,6 +40,7 @@ import { EraOfRevivalGuide } from "./components/EraOfRevivalGuide";
 import { GiftCodesGuide } from "./components/GiftCodesGuide";
 import { BlightBossGuide } from "./components/BlightBossGuide";
 import { HeroSkillsGuide } from "./components/HeroSkillsGuide";
+import { CursedPotionGuide } from "./components/CursedPotionGuide";
 import { GAME_TITLE } from "./data/allianceData";
 
 export default function App() {
@@ -68,6 +70,7 @@ export default function App() {
     { id: "sanctuary", label: "Прокачка Святилища", shortLabel: "Святилище", icon: Castle, badge: "1-30 УР" },
     { id: "schedule", label: "Календарь (7 Дней)", shortLabel: "Календарь", icon: Calendar },
     { id: "cheese-trap", label: "Сырная Ловушка", shortLabel: "Крыса", icon: Flame, badge: "ГАЙД" },
+    { id: "cursed-potion", label: "Проклятое Зелье", shortLabel: "Зелье", icon: FlaskConical, badge: "ИВЕНТ" },
     { id: "quiz", label: "Викторина", shortLabel: "Викторина", icon: BookOpen, badge: "ОТВЕТЫ" },
   ];
 
@@ -160,6 +163,7 @@ export default function App() {
             onOpenEraRevival={() => handleSelectTab("era-revival")}
             onOpenBlightBoss={() => handleSelectTab("blight-boss")}
             onOpenHeroSkills={() => handleSelectTab("hero-skills")}
+            onOpenCursedPotion={() => handleSelectTab("cursed-potion")}
           />
         )}
 
@@ -195,6 +199,8 @@ export default function App() {
         {currentTab === "sanctuary" && <SanctuaryUpgradeGuide />}
 
         {currentTab === "cheese-trap" && <CheeseTrapGuide />}
+
+        {currentTab === "cursed-potion" && <CursedPotionGuide />}
 
         {currentTab === "quiz" && <QuizCheatSheet />}
       </main>
