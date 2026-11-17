@@ -21,7 +21,6 @@ import {
   LayoutGrid,
   X,
   Check,
-  Skull,
   FlaskConical,
 } from "lucide-react";
 import { Header } from "./components/Header";
@@ -38,7 +37,8 @@ import { GearRoadmapGuide } from "./components/GearRoadmapGuide";
 import { MinistersGuide } from "./components/MinistersGuide";
 import { EraOfRevivalGuide } from "./components/EraOfRevivalGuide";
 import { GiftCodesGuide } from "./components/GiftCodesGuide";
-import { BlightBossGuide } from "./components/BlightBossGuide";
+import { DemonKingsGuide } from "./components/DemonKingsGuide";
+import { HeroAwakeningGuide } from "./components/HeroAwakeningGuide";
 import { HeroSkillsGuide } from "./components/HeroSkillsGuide";
 import { CursedPotionGuide } from "./components/CursedPotionGuide";
 import { GAME_TITLE } from "./data/allianceData";
@@ -57,8 +57,9 @@ export default function App() {
 
   const navTabs = [
     { id: "today", label: "Директива Дня", shortLabel: "Сегодня", icon: Shield, badge: "СЕГОДНЯ" },
-    { id: "blight-boss", label: "Босс Скверны", shortLabel: "Босс Скверны", icon: Skull, badge: "МАКС УРОН" },
+    { id: "demon-kings", label: "Короли Демонов", shortLabel: "Короли", icon: Crown, badge: "ГАЙД +50%" },
     { id: "era-revival", label: "Эра Возрождения", shortLabel: "Эра", icon: Sparkles, badge: "СЕЗОН" },
+    { id: "awakening", label: "Пробуждение Героев", shortLabel: "Пробуждение", icon: Flame, badge: "10★ / 1-40" },
     { id: "rules", label: "Правила Альянса", shortLabel: "Правила", icon: ShieldAlert, badge: "ВАЖНО" },
     { id: "ministers", label: "Гайд по Министрам", shortLabel: "Министры", icon: Crown, badge: "+50% БАФФ" },
     { id: "hero-skills", label: "Навыки Героев", shortLabel: "Навыки", icon: Zap, badge: "15 ГЕРОЕВ" },
@@ -161,15 +162,18 @@ export default function App() {
             onOpenGearRoadmap={() => handleSelectTab("gear-roadmap")}
             onOpenMinisters={() => handleSelectTab("ministers")}
             onOpenEraRevival={() => handleSelectTab("era-revival")}
-            onOpenBlightBoss={() => handleSelectTab("blight-boss")}
+            onOpenDemonKings={() => handleSelectTab("demon-kings")}
+            onOpenAwakening={() => handleSelectTab("awakening")}
             onOpenHeroSkills={() => handleSelectTab("hero-skills")}
             onOpenCursedPotion={() => handleSelectTab("cursed-potion")}
           />
         )}
 
-        {currentTab === "blight-boss" && <BlightBossGuide />}
+        {currentTab === "demon-kings" && <DemonKingsGuide />}
 
         {currentTab === "era-revival" && <EraOfRevivalGuide />}
+
+        {currentTab === "awakening" && <HeroAwakeningGuide />}
 
         {currentTab === "schedule" && (
           <WeeklySchedule

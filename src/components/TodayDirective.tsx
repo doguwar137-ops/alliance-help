@@ -14,7 +14,6 @@ import {
   FlaskConical,
   Castle,
   Crown,
-  Skull,
 } from "lucide-react";
 import { DUEL_DAYS } from "../data/allianceData";
 import { DuelDay } from "../types";
@@ -27,7 +26,8 @@ interface TodayDirectiveProps {
   onOpenGearRoadmap?: () => void;
   onOpenMinisters?: () => void;
   onOpenEraRevival?: () => void;
-  onOpenBlightBoss?: () => void;
+  onOpenDemonKings?: () => void;
+  onOpenAwakening?: () => void;
   onOpenHeroSkills?: () => void;
   onOpenCursedPotion?: () => void;
 }
@@ -40,7 +40,8 @@ export const TodayDirective: React.FC<TodayDirectiveProps> = ({
   onOpenGearRoadmap,
   onOpenMinisters,
   onOpenEraRevival,
-  onOpenBlightBoss,
+  onOpenDemonKings,
+  onOpenAwakening,
   onOpenHeroSkills,
   onOpenCursedPotion,
 }) => {
@@ -760,6 +761,37 @@ ${currentDay.phaseName}
           </div>
         )}
 
+        {/* Hero Awakening Guide Banner */}
+        {onOpenAwakening && (
+          <div className="mt-4 p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-2xs">
+            <div className="flex items-start sm:items-center gap-3">
+              <div className="p-2.5 rounded-xl bg-rose-100 border border-rose-200 text-rose-700 flex-shrink-0">
+                <Flame className="w-5 h-5" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-[10px] font-mono font-extrabold uppercase px-2 py-0.5 rounded bg-rose-100 text-rose-900 border border-rose-200">
+                    ПРОБУЖДЕНИЕ ГЕРОЕВ
+                  </span>
+                  <span className="text-xs font-bold text-slate-700">
+                    Марлена (1–7) • Синтия (15–21) • Анни (29–35)
+                  </span>
+                </div>
+                <p className="text-xs text-slate-700 mt-0.5">
+                  Окна по 7 дней, 10★ + 50 фрагментов (и путь без доната), почему нельзя делить универсалки на троих и разбор уровней 1–40!
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenAwakening}
+              className="w-full sm:w-auto justify-center px-4 py-2.5 sm:py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 flex-shrink-0 cursor-pointer"
+            >
+              <span>Гайд по пробуждению</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        )}
+
         {/* Era of Revival Season Guide Banner */}
         {onOpenEraRevival && (
           <div className="mt-4 p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-2xs">
@@ -888,32 +920,32 @@ ${currentDay.phaseName}
         )}
       </div>
 
-      {/* Blight Boss Quick Tactical Banner */}
-      {onOpenBlightBoss && (
-        <div className="rounded-xl bg-gradient-to-r from-purple-50 via-white to-amber-50 border border-purple-200 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-2xs">
+      {/* Demon Kings Full Guide Banner */}
+      {onOpenDemonKings && (
+        <div className="rounded-xl bg-gradient-to-r from-amber-50 via-white to-rose-50 border border-amber-300 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-2xs">
           <div className="flex items-start sm:items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-purple-100 border border-purple-200 text-purple-700 flex-shrink-0">
-              <Skull className="w-5 h-5 text-purple-600" />
+            <div className="p-2.5 rounded-xl bg-amber-100 border border-amber-200 text-amber-700 flex-shrink-0">
+              <Crown className="w-5 h-5 text-amber-600" />
             </div>
             <div>
               <div className="flex items-center gap-2 flex-wrap">
-                <h4 className="text-sm font-extrabold text-purple-950">
-                  Босс Скверны: как набить рекорд урона
+                <h4 className="text-sm font-extrabold text-amber-950">
+                  Короли демонов: лучшие отряды и разгон урона
                 </h4>
-                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-purple-200/80 text-purple-900 border border-purple-300">
-                  ФИОЛЕТОВЫЕ ПЕРЧАТКИ 30 УР. НА САППОРТОВ
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-amber-200/80 text-amber-950 border border-amber-300">
+                  КОНТРФРАКЦИЯ +50% • БЕЗ ТАНКОВ
                 </span>
               </div>
               <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
-                Боевое безумие перед боем + облик Ворон + Эпиграфы по типу войск. Пачки: Клэр / Стелла / Эш + саппорты Белл (+40% к атаке) и Харпер с фиолетовыми перчатками 30 ур.!
+                Воин (бьём Рейнджерами), Рейнджер (Колдунами), Колдун (Воинами). Топ-пятёрки, замены (Белл / Билли), красные мечи +10%, фиол перчатки, эпиграфы Ворона и чек-лист из 13 пунктов!
               </p>
             </div>
           </div>
           <button
-            onClick={onOpenBlightBoss}
-            className="w-full sm:w-auto justify-center px-4 py-2.5 sm:py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 flex-shrink-0 cursor-pointer"
+            onClick={onOpenDemonKings}
+            className="w-full sm:w-auto justify-center px-4 py-2.5 sm:py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 flex-shrink-0 cursor-pointer"
           >
-            <span>Гайд по Боссу</span>
+            <span>Гайд: Короли демонов</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
