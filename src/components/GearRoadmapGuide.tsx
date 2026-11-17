@@ -186,37 +186,73 @@ const GearSvgIcon: React.FC<{ type: GearType }> = ({ type }) => {
   }
 };
 
+const GEAR_ROADMAP_STORAGE_KEY = "last_asylum_gear_roadmap_done";
+const VALID_STEP_NUMS = new Set(GEAR_ROADMAP_STEPS.map((s) => s.num));
+
+function loadCompletedSteps(): number[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const saved = window.localStorage.getItem(GEAR_ROADMAP_STORAGE_KEY);
+    if (!saved) return [];
+    const parsed: unknown = JSON.parse(saved);
+    if (!Array.isArray(parsed)) return [];
+    return Array.from(
+      new Set(
+        parsed.filter(
+          (item): item is number =>
+            typeof item === "number" && VALID_STEP_NUMS.has(item)
+        )
+      )
+    );
+  } catch {
+    return [];
+  }
+}
+
+function saveCompletedSteps(steps: number[]): void {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(
+      GEAR_ROADMAP_STORAGE_KEY,
+      JSON.stringify(steps)
+    );
+  } catch {
+    // ignore storage errors
+  }
+}
+
 export const GearRoadmapGuide: React.FC = () => {
   const [copiedFull, setCopiedFull] = useState(false);
   const [copiedChat, setCopiedChat] = useState(false);
   const [heroFilter, setHeroFilter] = useState<string>("all");
-  const [completedSteps, setCompletedSteps] = useState<number[]>(() => {
-    try {
-      const saved = localStorage.getItem("last_asylum_gear_roadmap_done");
-      return saved ? JSON.parse(saved) : [];
-    } catch {
-      return [];
-    }
-  });
+  const [completedSteps, setCompletedSteps] = useState<number[]>(loadCompletedSteps);
 
   useEffect(() => {
-    try {
-      localStorage.setItem(
-        "last_asylum_gear_roadmap_done",
-        JSON.stringify(completedSteps)
-      );
-    } catch {
-      // ignore storage errors
-    }
+    saveCompletedSteps(completedSteps);
   }, [completedSteps]);
 
+  useEffect(() => {
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key === GEAR_ROADMAP_STORAGE_KEY) {
+        setCompletedSteps(loadCompletedSteps());
+      }
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
+  }, []);
+
   const toggleStep = (num: number) => {
-    setCompletedSteps((prev) =>
-      prev.includes(num) ? prev.filter((n) => n !== num) : [...prev, num]
-    );
+    setCompletedSteps((prev) => {
+      const next = prev.includes(num)
+        ? prev.filter((n) => n !== num)
+        : [...prev, num];
+      saveCompletedSteps(next);
+      return next;
+    });
   };
 
   const resetProgress = () => {
+    saveCompletedSteps([]);
     setCompletedSteps([]);
   };
 
