@@ -23,6 +23,7 @@ import {
   Check,
   FlaskConical,
   Gem,
+  Microscope,
 } from "lucide-react";
 import { Header } from "./components/Header";
 import { TodayDirective } from "./components/TodayDirective";
@@ -43,6 +44,7 @@ import { HeroAwakeningGuide } from "./components/HeroAwakeningGuide";
 import { HeroSkillsGuide } from "./components/HeroSkillsGuide";
 import { CursedPotionGuide } from "./components/CursedPotionGuide";
 import { CrystalValleyGuide } from "./components/CrystalValleyGuide";
+import { ResearchPriorityGuide } from "./components/ResearchPriorityGuide";
 import { GAME_TITLE } from "./data/allianceData";
 
 const DEFAULT_TAB = "today";
@@ -59,6 +61,7 @@ const TAB_HASH_BY_ID: Record<string, string> = {
   "crystal-valley": "crystals",
   "survival-sync": "double-rewards",
   sanctuary: "sanctuary",
+  research: "research",
   "hero-skills": "skills",
   "gear-roadmap": "gear",
   awakening: "awakening",
@@ -93,6 +96,9 @@ const HASH_ALIASES: Record<string, string> = {
   skills: "hero-skills",
   "gear-roadmap": "gear-roadmap",
   gear: "gear-roadmap",
+  research: "research",
+  science: "research",
+  lab: "research",
   "era-revival": "era-revival",
   era: "era-revival",
   server: "server-jump",
@@ -174,6 +180,7 @@ export default function App() {
       mobileTitle: "3. Развитие аккаунта",
       items: [
         { id: "sanctuary", label: "Прокачка Святилища", shortLabel: "Святилище", icon: Castle, badge: "1–30 УР", tone: "neutral" },
+        { id: "research", label: "Приоритет Исследований", shortLabel: "Наука", icon: Microscope, badge: "ГАЙД Т10", tone: "neutral" },
         { id: "hero-skills", label: "Навыки Героев", shortLabel: "Навыки", icon: Zap, badge: "15 ГЕРОЕВ", tone: "neutral" },
         { id: "gear-roadmap", label: "Снаряжение Героев", shortLabel: "Снаряжение", icon: Swords, badge: "ГАЙД 1–28", tone: "neutral" },
         { id: "awakening", label: "Пробуждение Героев", shortLabel: "Пробуждение", icon: Flame, badge: "10★ / 1–40", tone: "neutral" },
@@ -395,6 +402,7 @@ export default function App() {
             onOpenHeroSkills={() => handleSelectTab("hero-skills")}
             onOpenCursedPotion={() => handleSelectTab("cursed-potion")}
             onOpenCrystalValley={() => handleSelectTab("crystal-valley")}
+            onOpenResearch={() => handleSelectTab("research")}
           />
         )}
 
@@ -430,6 +438,10 @@ export default function App() {
         {currentTab === "survival-sync" && <SurvivalBattleGuide />}
 
         {currentTab === "sanctuary" && <SanctuaryUpgradeGuide />}
+
+        {currentTab === "research" && (
+          <ResearchPriorityGuide onOpenMinisters={() => handleSelectTab("ministers")} />
+        )}
 
         {currentTab === "cheese-trap" && <CheeseTrapGuide />}
 

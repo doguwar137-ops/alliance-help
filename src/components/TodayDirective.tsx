@@ -15,6 +15,7 @@ import {
   Castle,
   Crown,
   Gem,
+  Microscope,
 } from "lucide-react";
 import { DUEL_DAYS } from "../data/allianceData";
 import { DuelDay } from "../types";
@@ -32,6 +33,7 @@ interface TodayDirectiveProps {
   onOpenHeroSkills?: () => void;
   onOpenCursedPotion?: () => void;
   onOpenCrystalValley?: () => void;
+  onOpenResearch?: () => void;
 }
 
 export const TodayDirective: React.FC<TodayDirectiveProps> = ({
@@ -47,6 +49,7 @@ export const TodayDirective: React.FC<TodayDirectiveProps> = ({
   onOpenHeroSkills,
   onOpenCursedPotion,
   onOpenCrystalValley,
+  onOpenResearch,
 }) => {
   const [copiedMail, setCopiedMail] = useState(false);
   const [copiedChat, setCopiedChat] = useState(false);
@@ -683,7 +686,7 @@ ${currentDay.phaseName}
                   )}
                   {currentDay.id === "wednesday" && (
                     <span className="text-xs font-bold text-sky-800">
-                      🔬 Среда: Министр Исследований (+25% к скорости)
+                      🔬 Среда: Министр Развития (+50% к скорости)
                     </span>
                   )}
                 </div>
@@ -697,6 +700,37 @@ ${currentDay.phaseName}
               className="w-full sm:w-auto justify-center px-4 py-2.5 sm:py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 flex-shrink-0 cursor-pointer"
             >
               <span>Инструкция (4 шага)</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        )}
+
+        {/* Research Priority Guide Banner */}
+        {onOpenResearch && (
+          <div className="mt-4 p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-2xs">
+            <div className="flex items-start sm:items-center gap-3">
+              <div className="p-2.5 rounded-xl bg-sky-100 border border-sky-200 text-sky-700 flex-shrink-0">
+                <Microscope className="w-5 h-5" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-[10px] font-mono font-extrabold uppercase px-2 py-0.5 rounded bg-sky-100 text-sky-900 border border-sky-200">
+                    ПРИОРИТЕТ ИССЛЕДОВАНИЙ
+                  </span>
+                  <span className="text-xs font-bold text-slate-700">
+                    Развитие → Экономика → Дуэль → Солдат и Отряд 1 → Герои → Т10 → Караван
+                  </span>
+                </div>
+                <p className="text-xs text-slate-700 mt-0.5">
+                  Цветник (Трава), супер-награды Дуэли (4–6 и 7–9), Солдат и Отряд 1, фокус 1 фракции (Воин/Рейнджер/Колдун) и подготовка к Т10!
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={onOpenResearch}
+              className="w-full sm:w-auto justify-center px-4 py-2.5 sm:py-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 flex-shrink-0 cursor-pointer"
+            >
+              <span>Гайд по науке</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
