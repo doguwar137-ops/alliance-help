@@ -4,7 +4,6 @@ import {
   Hammer,
   Sprout,
   Trophy,
-  Users,
   Shield,
   Truck,
   Target,
@@ -20,7 +19,7 @@ import {
   Swords,
 } from "lucide-react";
 
-const FULL_RESEARCH_MAIL = `🔬 ПРИОРИТЕТЫ ИССЛЕДОВАНИЙ В ЛАБОРАТОРИИ (1–7)
+const FULL_RESEARCH_MAIL = `🔬 ПРИОРИТЕТЫ ИССЛЕДОВАНИЙ В ЛАБОРАТОРИИ (1–6)
 
 ⚡ ПО ВОЗМОЖНОСТИ:
 • Вторая Лаборатория: добавляет параллельный слот исследований навсегда (х2 темп развития).
@@ -48,19 +47,16 @@ const FULL_RESEARCH_MAIL = `🔬 ПРИОРИТЕТЫ ИССЛЕДОВАНИЙ �
 • Ветка «Отряд 1»: закрываем в максимум (атака и размер отряда).
 • Отряды 2–4: прокачиваем по остаточному принципу под сбор ресурсов.
 
-🦸 5. ГЕРОИ — СПЕЦИАЛИЗАЦИЯ:
-• Правило одного фокуса: выберите одну фракцию основного отряда (Воин / Рейнджер / Колдун) и вкладывайтесь только в неё до эндгейма. Не распыляйте ресурсы на три направления сразу.
-
-🎖️ 6. ЭЛИТНЫЕ ВОЙСКА — ПУТЬ К Т10:
+🎖️ 5. ЭЛИТНЫЕ ВОЙСКА — ПУТЬ К Т10:
 • Открывается на высоких уровнях Лаборатории и даёт главный скачок силы — войска 10-го уровня (Т10).
 • Заблаговременное накопление сотен миллионов ресурсов и Свитков обучения обязательно задолго до финальных узлов ветки.
 
-🚚 7. КАРАВАН — ПОЗДНЯЯ ИГРА:
+🚚 6. КАРАВАН — ПОЗДНЯЯ ИГРА:
 • Прокачивается в перерывах между основными боевыми исследованиями или после закрытия базовых веток Солдат, Отряда 1 и Т10 (вместе с поздними ветками Тактики на 25+ ур. Лаборатории).
 
 💡 СОВЕТ АЛЬЯНСА: перед запуском долгой технологии обязательно возьмите должность Министра Развития (+50% к скорости)!`;
 
-const SHORT_RESEARCH_CHAT = `🔬 ПРИОРИТЕТ ИССЛЕДОВАНИЙ: 1) Развитие (Мастер строительства и Ускорение исследований №1 при каждом апе Лабы; Вместимость/Скорость тренировки = лимит казарм; «Полное развитие» = снижение потерь PvP / Fatality Rate) → 2) Экономика (доп. слоты Цветник (Трава) → Скорость сбора с плиток; внутреннее производство не в приоритете) → 3) Дуэль альянсов (с 10 ур. Лабы, Свитки обучения + 15+ ур. для средних сундуков; цель — Уровень супер-награды 1 [ящики 4–6] и 2 [ящики 7–9]) → 4) Солдат и Отряд 1 (универсальный рост армии: в «Солдат» Атака/Защита/HP, «Загрузка солдата» только как проходная; Отряд 1 в макс; Отряды 2–4 под сбор) → 5) Герои (правило 1 фокуса — только фракция основного отряда: Воин/Рейнджер/Колдун до эндгейма) → 6) Элитные войска Т10 (копим заранее сотни млн ресов и Свитки обучения) → 7) Караван (поздняя игра: в перерывах или после Солдат, Отряда 1 и Т10).`;
+const SHORT_RESEARCH_CHAT = `🔬 ПРИОРИТЕТ ИССЛЕДОВАНИЙ: 1) Развитие (Мастер строительства и Ускорение исследований №1 при каждом апе Лабы; Вместимость/Скорость тренировки = лимит казарм; «Полное развитие» = снижение потерь PvP / Fatality Rate) → 2) Экономика (доп. слоты Цветник (Трава) → Скорость сбора с плиток; внутреннее производство не в приоритете) → 3) Дуэль альянсов (с 10 ур. Лабы, Свитки обучения + 15+ ур. для средних сундуков; цель — Уровень супер-награды 1 [ящики 4–6] и 2 [ящики 7–9]) → 4) Солдат и Отряд 1 (универсальный рост армии: в «Солдат» Атака/Защита/HP, «Загрузка солдата» только как проходная; Отряд 1 в макс; Отряды 2–4 под сбор) → 5) Элитные войска Т10 (копим заранее сотни млн ресов и Свитки обучения) → 6) Караван (поздняя игра: в перерывах или после Солдат, Отряда 1 и Т10).`;
 
 type StageFilter = "all" | "base" | "combat" | "late";
 
@@ -99,20 +95,13 @@ const ROUTE_MILESTONES = [
   },
   {
     step: 5,
-    title: "Герои",
-    subtitle: "1 фракция основного отряда (Воин / Рейнджер / Колдун)",
-    icon: Users,
-    tone: "bg-purple-100 text-purple-800 border-purple-200",
-  },
-  {
-    step: 6,
     title: "Элитные войска (Т10)",
     subtitle: "Заранее копим сотни млн ресурсов и Свитки обучения",
     icon: Target,
     tone: "bg-amber-100 text-amber-900 border-amber-300",
   },
   {
-    step: 7,
+    step: 6,
     title: "Караван",
     subtitle: "В перерывах или после Солдат, Отряда 1 и Т10",
     icon: Truck,
@@ -156,7 +145,7 @@ export const ResearchPriorityGuide: React.FC<ResearchPriorityGuideProps> = ({
               <div>
                 <div className="flex items-center gap-2 flex-wrap">
                   <span className="text-[11px] font-mono font-extrabold uppercase px-2.5 py-0.5 rounded-md bg-sky-100 text-sky-900 border border-sky-300">
-                    ЛАБОРАТОРИЯ • ПРИОРИТЕТЫ 1–7
+                    ЛАБОРАТОРИЯ • ПРИОРИТЕТЫ 1–6
                   </span>
                   <span className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-md bg-amber-100 text-amber-900 border border-amber-300">
                     ОТ ФУНДАМЕНТА ДО Т10 И КАРАВАНА
@@ -169,7 +158,7 @@ export const ResearchPriorityGuide: React.FC<ResearchPriorityGuideProps> = ({
                   Приоритет исследований в Лаборатории
                 </h1>
                 <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-3xl">
-                  Чёткий порядок прокачки: Развитие как фундамент, Цветник (Трава) и сбор в Экономике, супер-награды Дуэли альянсов, универсальная мощь Солдат и Отряда 1, специализация Героев (Воин / Рейнджер / Колдун), подготовка к Т10 и Караван.
+                  Чёткий порядок прокачки: Развитие как фундамент, Цветник (Трава) и сбор в Экономике, супер-награды Дуэли альянсов, универсальная мощь Солдат и Отряда 1, подготовка к Т10 и Караван.
                 </p>
               </div>
             </div>
@@ -264,10 +253,10 @@ export const ResearchPriorityGuide: React.FC<ResearchPriorityGuideProps> = ({
             </div>
             <div>
               <div className="text-xs font-extrabold text-slate-900">
-                5. Герои → 6. Т10 → 7. Караван
+                5. Т10 → 6. Караван
               </div>
               <p className="text-[11px] text-slate-600 mt-0.5">
-                1 фракция (Воин/Рейнджер/Колдун), копим на Т10 и Караван.
+                Заранее копим Свитки обучения на Т10; Караван — в перерывах или после базы.
               </p>
             </div>
           </div>
@@ -278,10 +267,10 @@ export const ResearchPriorityGuide: React.FC<ResearchPriorityGuideProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white border border-slate-200 rounded-2xl px-4 py-3 shadow-2xs">
         <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar pb-0.5 sm:pb-0">
           {[
-            { id: "all", label: "Все ветки (1–7)" },
+            { id: "all", label: "Все ветки (1–6)" },
             { id: "base", label: "1–2: Развитие и Экономика" },
-            { id: "combat", label: "3–5: Дуэль, Солдат/Отряд 1, Герои" },
-            { id: "late", label: "6–7: Т10 и Караван" },
+            { id: "combat", label: "3–4: Дуэль, Солдат и Отряд 1" },
+            { id: "late", label: "5–6: Т10 и Караван" },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -535,51 +524,18 @@ export const ResearchPriorityGuide: React.FC<ResearchPriorityGuideProps> = ({
                   </div>
                 </div>
               </div>
-
-              {/* STEP 5: Heroes */}
-              <div className="rounded-2xl bg-white border-2 border-purple-300 p-5 shadow-2xs space-y-3.5">
-                <div className="flex items-center justify-between gap-2 flex-wrap border-b border-purple-100 pb-3">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-purple-600 text-white font-mono font-extrabold text-sm flex items-center justify-center flex-shrink-0">
-                      5
-                    </div>
-                    <div>
-                      <span className="text-[10px] font-mono font-extrabold uppercase text-purple-800 block">
-                        СПЕЦИАЛИЗАЦИЯ
-                      </span>
-                      <h2 className="text-base sm:text-lg font-extrabold text-slate-900">
-                        Герои
-                      </h2>
-                    </div>
-                  </div>
-                  <span className="text-[10px] font-mono font-extrabold px-2 py-0.5 rounded bg-purple-100 text-purple-900 border border-purple-300">
-                    ПРАВИЛО ОДНОГО ФОКУСА
-                  </span>
-                </div>
-
-                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                  Ветка разделена на три фракции:{" "}
-                  <strong className="text-rose-900">Воин</strong>,{" "}
-                  <strong className="text-emerald-900">Рейнджер</strong> и{" "}
-                  <strong className="text-purple-900">Колдун</strong>.
-                </p>
-
-                <div className="p-3.5 rounded-xl bg-purple-50/80 border border-purple-200 text-xs sm:text-sm text-slate-800 leading-relaxed">
-                  <strong>Правило одного фокуса:</strong> не распыляйте ресурсы сразу на все три ветки. Выберите <strong>одну фракцию основного отряда</strong> (Воин / Рейнджер / Колдун) и качайте только её до самого эндгейма.
-                </div>
-              </div>
             </div>
           )}
 
-          {/* STEPS 6 & 7: ELITE TROOPS (T10) & CARAVAN */}
+          {/* STEPS 5 & 6: ELITE TROOPS (T10) & CARAVAN */}
           {showLate && (
             <div className="space-y-4">
-              {/* STEP 6: Elite Troops (T10) */}
+              {/* STEP 5: Elite Troops (T10) */}
               <div className="rounded-2xl bg-white border-2 border-amber-400 p-5 shadow-2xs space-y-3.5">
                 <div className="flex items-center justify-between gap-2 flex-wrap border-b border-amber-100 pb-3">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-xl bg-amber-600 text-white font-mono font-extrabold text-sm flex items-center justify-center flex-shrink-0">
-                      6
+                      5
                     </div>
                     <div>
                       <span className="text-[10px] font-mono font-extrabold uppercase text-amber-800 block">
@@ -607,12 +563,12 @@ export const ResearchPriorityGuide: React.FC<ResearchPriorityGuideProps> = ({
                 </div>
               </div>
 
-              {/* STEP 7: Caravan */}
+              {/* STEP 6: Caravan */}
               <div className="rounded-2xl bg-white border-2 border-slate-300 p-5 shadow-2xs space-y-3.5">
                 <div className="flex items-center justify-between gap-2 flex-wrap border-b border-slate-200 pb-3">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-xl bg-slate-800 text-white font-mono font-extrabold text-sm flex items-center justify-center flex-shrink-0">
-                      7
+                      6
                     </div>
                     <div>
                       <span className="text-[10px] font-mono font-extrabold uppercase text-slate-500 block">
@@ -637,7 +593,7 @@ export const ResearchPriorityGuide: React.FC<ResearchPriorityGuideProps> = ({
           )}
         </div>
 
-        {/* Right Sidebar: Final Priority Route 1-7 */}
+        {/* Right Sidebar: Final Priority Route 1-6 */}
         <div className="space-y-5">
           <div className="rounded-2xl bg-white border-2 border-slate-300 p-5 shadow-2xs space-y-4">
             <div className="flex items-center gap-2.5 border-b border-slate-200 pb-3">
