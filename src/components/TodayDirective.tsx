@@ -14,6 +14,7 @@ import {
   FlaskConical,
   Castle,
   Crown,
+  Gem,
 } from "lucide-react";
 import { DUEL_DAYS } from "../data/allianceData";
 import { DuelDay } from "../types";
@@ -30,6 +31,7 @@ interface TodayDirectiveProps {
   onOpenAwakening?: () => void;
   onOpenHeroSkills?: () => void;
   onOpenCursedPotion?: () => void;
+  onOpenCrystalValley?: () => void;
 }
 
 export const TodayDirective: React.FC<TodayDirectiveProps> = ({
@@ -44,6 +46,7 @@ export const TodayDirective: React.FC<TodayDirectiveProps> = ({
   onOpenAwakening,
   onOpenHeroSkills,
   onOpenCursedPotion,
+  onOpenCrystalValley,
 }) => {
   const [copiedMail, setCopiedMail] = useState(false);
   const [copiedChat, setCopiedChat] = useState(false);
@@ -977,6 +980,37 @@ ${currentDay.phaseName}
             className="w-full sm:w-auto justify-center px-4 py-2.5 sm:py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 flex-shrink-0 cursor-pointer"
           >
             <span>Гайд по Зелью</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
+
+      {/* Crystal Valley Guide Banner */}
+      {onOpenCrystalValley && (
+        <div className="rounded-xl bg-gradient-to-r from-sky-50 via-white to-indigo-50 border border-sky-200 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-2xs">
+          <div className="flex items-start sm:items-center gap-3">
+            <div className="p-2.5 rounded-xl bg-sky-100 border border-sky-200 text-sky-700 flex-shrink-0">
+              <Gem className="w-5 h-5 text-sky-600" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2 flex-wrap">
+                <h4 className="text-sm font-extrabold text-sky-950">
+                  Долина кристальных скоплений: маршрут на 350K–450K+ кристаллов
+                </h4>
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-sky-200/80 text-sky-900 border border-sky-300">
+                  30 МИН • АРМИЯ НЕ ТЕРЯЕТСЯ • 10–12 И 20–22 МИН
+                </span>
+              </div>
+              <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
+                Старт возле 2–3 крыс, навыки (Право → Право → Лево → Лево → Право/Лево), захват плитки раз в 60 сек (+5000), мгновенные кристаллы на 10–12 и 20–22 минутах, ТП (6 мин КД)!
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={onOpenCrystalValley}
+            className="w-full sm:w-auto justify-center px-4 py-2.5 sm:py-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 flex-shrink-0 cursor-pointer"
+          >
+            <span>Гайд по Долине</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>

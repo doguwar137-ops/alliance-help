@@ -124,7 +124,7 @@ export const DUEL_DAYS: DuelDay[] = [
     id: "wednesday",
     dayIndex: 2,
     name: "Среда (День 3)",
-    phaseName: "Технологические Исследования",
+    phaseName: "Исследование технологий",
     phaseNumber: 3,
     badge: "НАУКА",
     iconName: "FlaskConical",
@@ -153,7 +153,7 @@ export const DUEL_DAYS: DuelDay[] = [
     pointsOpportunities: [],
     accumulation: [],
     shortChatTemplate: "СР: Наука и сундуки Ворона! Сокол — жмем «Забрать все» по 🔴! СЕГОДНЯ ПОСЛЕДНИЙ ДЕНЬ регистрации на Гонку за эликсиром (Команда А 14:00 / Б 23:00 МСК, или напишите R4 — подскажет как)!",
-    exactMailTemplate: `СРЕДА: ТЕХНОЛОГИИ И НАУКА
+    exactMailTemplate: `СРЕДА: ИССЛЕДОВАНИЕ ТЕХНОЛОГИЙ
 
 Клан, сегодня день исследований! Все очки идут за завершение наук в институте и открытие сундуков снаряжения Ворона.
 

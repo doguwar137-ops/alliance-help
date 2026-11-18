@@ -22,6 +22,7 @@ import {
   X,
   Check,
   FlaskConical,
+  Gem,
 } from "lucide-react";
 import { Header } from "./components/Header";
 import { TodayDirective } from "./components/TodayDirective";
@@ -41,6 +42,7 @@ import { DemonKingsGuide } from "./components/DemonKingsGuide";
 import { HeroAwakeningGuide } from "./components/HeroAwakeningGuide";
 import { HeroSkillsGuide } from "./components/HeroSkillsGuide";
 import { CursedPotionGuide } from "./components/CursedPotionGuide";
+import { CrystalValleyGuide } from "./components/CrystalValleyGuide";
 import { GAME_TITLE } from "./data/allianceData";
 
 const DEFAULT_TAB = "today";
@@ -54,6 +56,7 @@ const TAB_HASH_BY_ID: Record<string, string> = {
   "cheese-trap": "cheese-trap",
   quiz: "quiz",
   "cursed-potion": "potion",
+  "crystal-valley": "crystals",
   "survival-sync": "double-rewards",
   sanctuary: "sanctuary",
   "hero-skills": "skills",
@@ -80,6 +83,9 @@ const HASH_ALIASES: Record<string, string> = {
   trap: "cheese-trap",
   "cursed-potion": "cursed-potion",
   potion: "cursed-potion",
+  "crystal-valley": "crystal-valley",
+  crystals: "crystal-valley",
+  valley: "crystal-valley",
   "survival-sync": "survival-sync",
   "double-rewards": "survival-sync",
   x2: "survival-sync",
@@ -158,6 +164,7 @@ export default function App() {
         { id: "cheese-trap", label: "Сырная Ловушка", shortLabel: "Крыса", icon: Flame, badge: "ГАЙД", tone: "neutral" },
         { id: "quiz", label: "Викторина", shortLabel: "Викторина", icon: BookOpen, badge: "ОТВЕТЫ", tone: "neutral" },
         { id: "cursed-potion", label: "Проклятое Зелье", shortLabel: "Зелье", icon: FlaskConical, badge: "ИВЕНТ", tone: "neutral" },
+        { id: "crystal-valley", label: "Долина Кристаллов", shortLabel: "Кристаллы", icon: Gem, badge: "ИВЕНТ", tone: "neutral" },
         { id: "survival-sync", label: "Двойные Награды", shortLabel: "Х2 Награды", icon: Zap, badge: "Х2 ОЧКИ", tone: "neutral" },
       ],
     },
@@ -387,6 +394,7 @@ export default function App() {
             onOpenAwakening={() => handleSelectTab("awakening")}
             onOpenHeroSkills={() => handleSelectTab("hero-skills")}
             onOpenCursedPotion={() => handleSelectTab("cursed-potion")}
+            onOpenCrystalValley={() => handleSelectTab("crystal-valley")}
           />
         )}
 
@@ -426,6 +434,8 @@ export default function App() {
         {currentTab === "cheese-trap" && <CheeseTrapGuide />}
 
         {currentTab === "cursed-potion" && <CursedPotionGuide />}
+
+        {currentTab === "crystal-valley" && <CrystalValleyGuide />}
 
         {currentTab === "quiz" && <QuizCheatSheet />}
       </main>
